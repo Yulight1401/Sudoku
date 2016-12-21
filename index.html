@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        background-color: #fefefe;
+    }
+    *{
+        margin: 0px;
+        font-family: 'DejaVu Sans Mono',cursive;
+        font-weight: lighter;
+        color: #555555;
+        transition: all 0.3s;
+    }
+    button{
+        border-radius: 2px;
+    }
+    .table{
+        width: 600px;
+        height: 600px;
+        margin: 30px auto 10px auto;
+    }
+    .table td{
+        border: 1px solid gainsboro;
+        height: 60px;
+        width: 60px;
+        overflow: hidden;
+    }
+    .dialog{
+        position: fixed;
+        z-index: 1000;
+        width: 600px;
+        height: 280px;
+        left: 50%;
+        top: 50%;
+        background-color: #fefefe;
+        margin:-150px 0 0 -300px ;
+        text-align: center;
+        box-shadow: 1px 1px 10px gray;
+        border-radius: 2px;
+    }
+    .title{
+        margin: 50px 0 20px 0;
+    }
+    .map{
+        position: fixed;
+        z-index: 99;
+        width: 100%;
+        height:100%;
+        background-color: black;
+        opacity: 0.2;
+
+    }
+    .buttons{
+        text-align: center;
+    }
+    .button{
+        margin: 20px 10px 0px 10px;
+        border: none;
+        color: white;
+        width: 150px;
+        height: 60px;
+    }
+    .container{
+        filter: blur(3px);
+        text-align: center;
+    }
+    .cloum{
+        margin-left: -220px;
+        line-height: 24px;
+        letter-spacing: 15px;
+    }
+    #answer{
+        height: 400px;
+        display: none;
+    }
+    #answer h2{
+        margin: 20px 0 20px 0;
+    }
+    .broad{
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        line-height: 80px;
+        padding: 20px;
+        right: 10px;
+    }
+    .sure{
+        background-color: green;
+    }
+    .wrong{
+        background-color: orangered;
+    }
+    .pretty{
+        background-color: orange;
+    }
+</style>
+<body>
+<div id="choice" class="dialog">
+    <h1 class="title">选择难度</h1>
+    <p class="buttons"><button class="button sure" onclick="start(22)">简单</button><button class="button pretty" onclick="start(30)">中等</button><button class="button wrong" onclick="start(38)">困难</button></p>
+</div>
+<div id="answer"  class="dialog">
+    <h2>参考答案</h2>
+    <div class="broad">
+        <h1 id="result">成功！</h1>
+        <h1 id="time"></h1>
+    </div>
+    <p class="cloum">123124121</p>
+    <p class="cloum">123124121</p>
+    <p class="cloum">123124121</p>
+    <p class="cloum">123124121</p>
+    <p class="cloum">123124121</p>
+    <p class="cloum">123124121</p>
+    <p class="cloum">123124121</p>
+    <p class="cloum">123124121</p>
+    <p class="cloum">123124121</p>
+    <button class="button sure" onclick="restart()">重新开始</button>
+</div>
+<div id="map" class="map"></div>
+<div class="container">
+    <table class="table">
+        <tbody id="game" >
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="button wrong" onclick="restart()">重选难度</button>
+    <button class="button sure" onclick="check()">检查正误</button>
+</div>
+</body>
+<script src="Sudoku.js"></script>
+<script>
+    var time=0;
+    var sudoArr=[];
+function hide(id) {
+    var ele=document.getElementById(id);
+    ele.style.opacity=0;
+    setTimeout(function () {
+                ele.style.display='none';
+            },300)
+}
+function show(id) {
+    var ele=document.getElementById(id);
+    ele.style.display='block';
+    ele.style.opacity=1;
+    if(id=='map'){
+        ele.style.opacity=0.2;
+        document.getElementsByClassName('container')[0].style.filter="blur(2px)";
+    }else if(id=='answer'){
+        document.getElementById('time').innerHTML='时间：'+time+'s';
+    }
+}
+function restart() {
+    hide('answer');
+    show('choice');
+    show('map');
+}
+function start(easy) {
+    hide('choice');
+    hide('map');
+    document.getElementsByClassName('container')[0].style.filter="blur(0px)";
+    try{
+        var sudo=Sudo.creatSudo();
+    }catch (e){
+        var sudo=Sudo.creatSudo();
+    }
+    //console.log(Sudo.getBlanks(easy));
+    console.log(sudo);
+    sudoArr=sudo;
+    renderTable(Sudo.getBlanks(easy),sudo);
+    timer();
+    //console.log(sudo.status);
+    setAnswer(sudo);
+}
+function check() {
+    var arr=getTable();
+    var status=Sudo.check(arr);
+    console.log(arr);
+    if(status.status){
+        show('answer');show('map');
+    }else{
+        alert('第'+status.i+'行,第'+status.j+'列，验证失败！');
+    }
+}
+function setAnswer(sudo) {
+    var answers=document.getElementsByClassName('cloum');
+    for(var i=0;i<9;i++){
+        answers[i].innerHTML=sudo[i].join('');
+    }
+}
+function timer() {
+    time=0;
+    setInterval(function () {
+        time++;
+    },1000)
+}
+function getTable() {
+    var arr=new Array(9);
+    for(var i=0;i<9;i++){
+        arr[i]=new Array(9);
+    }
+    var game=document.getElementById('game');
+    var xChilds=game.children;
+    for(var i=0;i<9;i++){
+        var yChilds=xChilds[i].children;
+        for(var k=0;k<9;k++){
+            var num=yChilds[k].innerHTML.length==0? -1:yChilds[k].innerHTML;
+            arr[i][k]=parseInt(num);
+        }
+    }
+    return arr;
+}
+function renderTable(blank,arr) {
+    var game=document.getElementById('game');
+    var xChilds=game.children;
+    for(var i=0;i<9;i++){
+        var yChilds=xChilds[i].children;
+        for(var k=0;k<9;k++){
+                yChilds[k].innerHTML='';
+                yChilds[k].style.background='white';
+                yChilds[k].setAttribute('contenteditable','false');
+        }
+    }
+    for(var i=0;i<9;i++){
+        var yChilds=xChilds[i].children;
+        for(var k=0;k<9;k++){
+            if(blank[i][k]==0){
+                yChilds[k].setAttribute('contenteditable','true');
+            }else{
+                yChilds[k].innerHTML=arr[i][k];
+                yChilds[k].style.background='gainsboro';
+            }
+        }
+    }
+}
+</script>
+</html>
