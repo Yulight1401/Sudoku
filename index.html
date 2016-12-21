@@ -120,7 +120,7 @@
     <p class="cloum">123124121</p>
     <button class="button sure" onclick="restart()">重新开始</button>
 </div>
-<div id="map" class="map"></div>
+<div id="map" class="map" onclick="hideall()"></div>
 <div class="container">
     <table class="table">
         <tbody id="game" >
@@ -239,6 +239,12 @@ function hide(id) {
     setTimeout(function () {
                 ele.style.display='none';
             },300)
+}
+function hideall() {
+    hide('map');
+    hide('choice');
+    hide('answer');
+    document.getElementsByClassName('container')[0].style.filter="blur(0px)";
 }
 function show(id) {
     var ele=document.getElementById(id);
