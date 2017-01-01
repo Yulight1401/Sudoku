@@ -15,10 +15,10 @@ var Sudo=(function () {
     var check=function (arr) {
         var status={status:true,i:1,j:1};
         for(var i in arr){
-            if(!checkRow(arr,i)) status.status=false;(function (){status.i=i+1});
+            if(!checkRow(arr,i)) {status.status=false;(function(i){status.i=++i;console.log(i)})(i)}
         }
         for(var j in arr[i]){
-            if(!checkLine(arr,j)) status.status=false;(function (){status.j=j+1});
+            if(!checkLine(arr,j)) {status.status=false;status.j=function(j){return ++j}(j)}
         }
         return status;
     }
